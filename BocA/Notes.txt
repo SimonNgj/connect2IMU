@@ -1,0 +1,1 @@
+After read from serial port, we get a string. We can print whole the string, and split them into interger numbers. However, when we convert them into interger. The last number will always be 0. Solutions: Add one more number to string.
