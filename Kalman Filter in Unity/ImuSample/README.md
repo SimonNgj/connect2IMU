@@ -1,9 +1,1 @@
-# Imu Sample
-
-開発中です。  
-回転クォータニオン部分はできました。
-
-回転を同期させたいオブジェクトに、IMUObject.csをAddComponentするだけです。
-
-現状、起動時のデバイスの向きが、初期値になるので、  
-起動時にデバイスを縦に持ってて下さい。
+# a sample with IMU sensor
