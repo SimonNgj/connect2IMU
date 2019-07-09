@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "teglove.Plugins", "teglove.Plugins.csproj", "{2F92D66D-7E72-CECF-4B6A-97220E8D4718}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "teglove", "teglove.csproj", "{4FD4D09C-3E3D-5811-8385-29168239C750}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F92D66D-7E72-CECF-4B6A-97220E8D4718}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F92D66D-7E72-CECF-4B6A-97220E8D4718}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F92D66D-7E72-CECF-4B6A-97220E8D4718}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F92D66D-7E72-CECF-4B6A-97220E8D4718}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FD4D09C-3E3D-5811-8385-29168239C750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FD4D09C-3E3D-5811-8385-29168239C750}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FD4D09C-3E3D-5811-8385-29168239C750}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FD4D09C-3E3D-5811-8385-29168239C750}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
