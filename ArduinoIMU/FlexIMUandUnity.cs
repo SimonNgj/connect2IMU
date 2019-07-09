@@ -1,4 +1,4 @@
-// Full project can be found here: https://github.com/SimonNgj/connect2IMU/tree/master/teglove
+// More concrete project can be found here: https://github.com/SimonNgj/connect2IMU/tree/master/teglove
 //# define use_kalman
 //# define move_hand
 # define rotate_hand
