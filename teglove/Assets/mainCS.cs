@@ -9,15 +9,17 @@ using Kalman;
 
 public class mainCS : MonoBehaviour
 {
-    GameObject Lhand;
+    GameObject Lhand, Lhand1;
     GameObject Lthumb1, Lthumb2, Lthumb3;
     GameObject Lindex1, Lindex2, Lindex3;
     GameObject Lmiddle1, Lmiddle2, Lmiddle3;
     GameObject Lring1, Lring2, Lring3;
-    //GameObject Lpinky0, Lpinky1, Lpinky2, Lpinky3;
+    GameObject Lpinky0, Lpinky1, Lpinky2, Lpinky3;
     
     SerialPort sp = new SerialPort("COM1", 9600, Parity.None, 8, StopBits.One);
     public float speed = 1f;
+    public float moveSpeed = 0.02f;
+    public float rotSpeed = 10f;
 
 #if (use_kalman)
     IKalmanWrapper kalman0, kalman1, kalman2, kalman3;
@@ -41,18 +43,15 @@ public class mainCS : MonoBehaviour
         Lhand = GameObject.Find("l_hand_skeletal");
 #endif
 
-        //pinky0 = GameObject.Find("l_hand_skeletal/hands:l_hand_world/hands:b_l_hand/hands:b_l_pinky0");
-        //pinky1 = GameObject.Find("l_hand_skeletal/hands:l_hand_world/hands:b_l_hand/hands:b_l_pinky0/hands:b_l_pinky1");
-        //pinky2 = GameObject.Find("l_hand_skeletal/hands:l_hand_world/hands:b_l_hand/hands:b_l_pinky0/hands:b_l_pinky1/hands:b_l_pinky2");
-        //pinky3 = GameObject.Find("l_hand_skeletal/hands:l_hand_world/hands:b_l_hand/hands:b_l_pinky0/hands:b_l_pinky1/hands:b_l_pinky2/hands:b_l_pinky3");
-
-        Lindex1 = GameObject.Find("l_hand_skeletal/hands:l_hand_world/hands:b_l_hand/hands:b_l_index1");
-        Lindex2 = GameObject.Find("l_hand_skeletal/hands:l_hand_world/hands:b_l_hand/hands:b_l_index1/hands:b_l_index2");
-        Lindex3 = GameObject.Find("l_hand_skeletal/hands:l_hand_world/hands:b_l_hand/hands:b_l_index1/hands:b_l_index2/hands:b_l_index3");
+        Lhand1 = GameObject.Find("l_hand_skeletal/hands:l_hand_world/hands:b_l_hand");
 
         Lthumb1 = GameObject.Find("l_hand_skeletal/hands:l_hand_world/hands:b_l_hand/hands:b_l_thumb1");
         Lthumb2 = GameObject.Find("l_hand_skeletal/hands:l_hand_world/hands:b_l_hand/hands:b_l_thumb1/hands:b_l_thumb2");
         Lthumb3 = GameObject.Find("l_hand_skeletal/hands:l_hand_world/hands:b_l_hand/hands:b_l_thumb1/hands:b_l_thumb2/hands:b_l_thumb3");
+
+        Lindex1 = GameObject.Find("l_hand_skeletal/hands:l_hand_world/hands:b_l_hand/hands:b_l_index1");
+        Lindex2 = GameObject.Find("l_hand_skeletal/hands:l_hand_world/hands:b_l_hand/hands:b_l_index1/hands:b_l_index2");
+        Lindex3 = GameObject.Find("l_hand_skeletal/hands:l_hand_world/hands:b_l_hand/hands:b_l_index1/hands:b_l_index2/hands:b_l_index3");
 
         Lmiddle1 = GameObject.Find("l_hand_skeletal/hands:l_hand_world/hands:b_l_hand/hands:b_l_middle1");
         Lmiddle2 = GameObject.Find("l_hand_skeletal/hands:l_hand_world/hands:b_l_hand/hands:b_l_middle1/hands:b_l_middle2");
@@ -61,11 +60,78 @@ public class mainCS : MonoBehaviour
         Lring1 = GameObject.Find("l_hand_skeletal/hands:l_hand_world/hands:b_l_hand/hands:b_l_ring1");
         Lring2 = GameObject.Find("l_hand_skeletal/hands:l_hand_world/hands:b_l_hand/hands:b_l_ring1/hands:b_l_ring2");
         Lring3 = GameObject.Find("l_hand_skeletal/hands:l_hand_world/hands:b_l_hand/hands:b_l_ring1/hands:b_l_ring2/hands:b_l_ring3");
+
+        Lpinky0 = GameObject.Find("l_hand_skeletal/hands:l_hand_world/hands:b_l_hand/hands:b_l_pinky0");
+        Lpinky1 = GameObject.Find("l_hand_skeletal/hands:l_hand_world/hands:b_l_hand/hands:b_l_pinky0/hands:b_l_pinky1");
+        Lpinky2 = GameObject.Find("l_hand_skeletal/hands:l_hand_world/hands:b_l_hand/hands:b_l_pinky0/hands:b_l_pinky1/hands:b_l_pinky2");
+        Lpinky3 = GameObject.Find("l_hand_skeletal/hands:l_hand_world/hands:b_l_hand/hands:b_l_pinky0/hands:b_l_pinky1/hands:b_l_pinky2/hands:b_l_pinky3");
     }
 
     // Update is called once per frame
     void Update ()
     {
+        //if (Input.GetKey(KeyCode.M))
+        //{
+        //    //print("You pressed the A key");
+        //    //transform.Rotate(0f, 0f, 10f * Time.deltaTime);
+        //    //Lhand1.transform.localRotation = Quaternion.RotateTowards(
+        //    //Lhand1.transform.localRotation,
+        //    //Quaternion.Euler(10f,
+        //    //                 0f,
+        //    //                 0f),
+        //    //60f);
+
+        //    //transform.RotateAround(Lhand1.transform.forward, 10f);
+        //    Lhand1.transform.Rotate(
+        //        Input.GetAxis("AroundX") * rotSpeed,
+        //        Input.GetAxis("AroundY") * rotSpeed,
+        //        Input.GetAxis("AroundZ") * rotSpeed, 
+        //        Space.Self);
+        //    print(Input.GetAxis("AroundX") * rotSpeed);
+
+        //}
+
+        transform.Translate(Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime, 
+                            Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime,
+                            Input.GetAxis("Depth") * moveSpeed * Time.deltaTime);
+
+        Lhand1.transform.Rotate(
+                Input.GetAxis("AroundX") * rotSpeed,
+                Input.GetAxis("AroundY") * rotSpeed,
+                Input.GetAxis("AroundZ") * rotSpeed,
+                Space.Self);
+
+        Lthumb2.transform.Rotate(
+                0f,
+                0f,
+                Input.GetAxis("Lthumb2") * rotSpeed,
+                Space.Self);
+        //print(Input.GetAxis("Lthumb2") * rotSpeed);
+
+        Lindex2.transform.Rotate( 
+                0f,
+                0f,
+                Input.GetAxis("Lindex2") * rotSpeed,
+                Space.Self);
+
+        Lmiddle2.transform.Rotate(
+                0f,
+                0f,
+                Input.GetAxis("Lmiddle2") * rotSpeed,
+                Space.Self);
+
+        Lring2.transform.Rotate(
+                0f,
+                0f,
+                Input.GetAxis("Lring2") * rotSpeed,
+                Space.Self);
+
+        Lpinky2.transform.Rotate(
+                0f,  
+                0f,
+                Input.GetAxis("Lpinky2") * rotSpeed,
+                Space.Self);
+
         if (sp.IsOpen)
         {
             try
