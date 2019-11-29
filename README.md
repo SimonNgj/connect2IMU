@@ -1,3 +1,3 @@
-# connect2IMU
+# Connection
 
-Some mini codes working with IMU sensors and Unity
+Some mini codes working with IMU sensors, Arduino and Unity for fun
